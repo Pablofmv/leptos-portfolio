@@ -1,21 +1,23 @@
 use leptos::prelude::*;
+use crate::components::details::Details;
 
 #[component]
 pub fn Summary() -> impl IntoView {
     view! {
-        <section class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-[1.2fr_0.8fr] gap-10 items-start">
-            <div class="space-y-5">
-                <h2 class="text-[2rem] font-extrabold leading-tight text-zinc-800">
-                    "Tech Professional interested in Performance and Design"
+        <section class="summary">
+            <div class="summary__content">
+                <h2 class="title-lg">
+                    "Tech Professional interested in System Design and Coding"
                 </h2>
 
-                <div class="space-y-3 text-[1.05rem] leading-8 text-zinc-700">
+                <div class="summary__meta text-body">
                     <p>
-                        "🎓 MSC @ "
+                        "🎓 Msc @ "
                         <a
                             href="https://www.columbia.edu"
                             target="_blank"
-                            class="underline hover:text-zinc-900"
+                            rel="noopener noreferrer"
+                            class="link"
                         >
                             "Columbia"
                         </a>
@@ -25,30 +27,33 @@ pub fn Summary() -> impl IntoView {
                         "💻 Current. @ "
                         <a
                             href="https://www.spglobal.com/en"
-                            class="underline hover:text-zinc-900"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="link"
                         >
                             "SP"
                         </a>
                         " // Prev. @ "
                         <a
                             href="https://www.regeneron.com"
-                            class="underline hover:text-zinc-900"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="link"
                         >
                             "Regeneron"
                         </a>
                     </p>
                 </div>
+                <Details />
             </div>
 
-            <div class="hidden md:flex justify-center items-start">
+            <div class="summary__visual">
                 <img
                     src="/illustration.png"
                     alt="Developer illustration"
-                    class="w-[200px] h-auto object-contain"
+                    class="summary__image"
                 />
             </div>
-        
-
         </section>
     }
 }
