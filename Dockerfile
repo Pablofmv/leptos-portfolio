@@ -1,5 +1,5 @@
 # ---------- Build ----------
-    FROM rust:latest as builder
+    FROM rust:latest AS builder
 
     WORKDIR /app
     
@@ -7,8 +7,7 @@
     
     COPY . .
     
-    # IMPORTANT: enable SSR
-    RUN cargo build --release --features ssr
+    RUN cargo leptos build --release
     
     # ---------- Runtime ----------
     FROM debian:bookworm-slim
@@ -17,8 +16,10 @@
     
     RUN apt-get update && apt-get install -y ca-certificates && rm -rf /var/lib/apt/lists/*
     
-    COPY --from=builder /app/target/release/leptos-portfolio /app/server
+    COPY --from=builder /app/target/release/leptos-portfolio /app/leptos-portfolio
+    COPY --from=builder /app/target/site /app/target/site
+    COPY --from=builder /app/public /app/public
     
     EXPOSE 3000
     
-    CMD ["./server"]
+    CMD ["./leptos-portfolio"]
