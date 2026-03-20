@@ -3,8 +3,12 @@
 
     WORKDIR /app
     
+    RUN cargo install cargo-leptos
+    
     COPY . .
-    RUN cargo build --release
+    
+    # IMPORTANT: enable SSR
+    RUN cargo build --release --features ssr
     
     # ---------- Runtime ----------
     FROM debian:bookworm-slim
