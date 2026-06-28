@@ -1,6 +1,15 @@
 use leptos::prelude::*;
 use leptos_meta::*;
+use leptos_router::{
+    components::{
+        Route,
+        Router,
+        Routes,
+    },
+    path,
+};
 
+use crate::pages::dashboard::DashboardPage;
 use crate::pages::home::HomePage;
 
 #[component]
@@ -12,7 +21,18 @@ pub fn App() -> impl IntoView {
         <Meta charset="utf-8"/>
         <Meta name="viewport" content="width=device-width, initial-scale=1"/>
         <Stylesheet id="leptos" href="/pkg/leptos-portfolio.css"/>
-        <HomePage/>
+        
+        <Router>
+
+            <Routes fallback =|| view! { <HomePage /> }>
+
+                <Route path=path!("/") view=HomePage />
+                <Route path=path!("/dashboard") view=DashboardPage/>
+
+            </Routes>
+
+        </Router>
+
     }
 }
 
