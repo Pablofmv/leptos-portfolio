@@ -1,5 +1,6 @@
 use gloo_net::http::Request;
 use leptos::{
+    logging,
     prelude::*,
     task::spawn_local,
 };
@@ -42,7 +43,11 @@ pub fn DashboardPage() -> impl IntoView {
         signal::<Option<Result<Vec<AnalyticsCountResponse>, String>>>(None);
 
     Effect::new(move |_| {
+        logging::log!("Dashboard effect started");
+
         spawn_local(async move {
+            logging::log!("Fetching analytics...");
+
             set_total_clicks.set(Some(
                 fetch_json::<ClickCountResponse>(
                     &format!("{API_BASE_URL}/analytics/clicks/total"),
@@ -82,7 +87,9 @@ pub fn DashboardPage() -> impl IntoView {
 
                 {move || {
                     match total_clicks.get() {
-                        None => view! { <p>"Loading total clicks..."</p> }.into_any(),
+                        None => view! {
+                            <p>"Loading total clicks..."</p>
+                        }.into_any(),
 
                         Some(Ok(data)) => view! {
                             <p>{data.total_clicks}</p>
@@ -100,7 +107,9 @@ pub fn DashboardPage() -> impl IntoView {
 
                 {move || {
                     match unique_visitors.get() {
-                        None => view! { <p>"Loading unique visitors..."</p> }.into_any(),
+                        None => view! {
+                            <p>"Loading unique visitors..."</p>
+                        }.into_any(),
 
                         Some(Ok(data)) => view! {
                             <p>{data.unique_visitors}</p>
@@ -118,7 +127,9 @@ pub fn DashboardPage() -> impl IntoView {
 
                 {move || {
                     match device_analytics.get() {
-                        None => view! { <p>"Loading device analytics..."</p> }.into_any(),
+                        None => view! {
+                            <p>"Loading device analytics..."</p>
+                        }.into_any(),
 
                         Some(Ok(items)) => view! {
                             <ul>
@@ -145,7 +156,9 @@ pub fn DashboardPage() -> impl IntoView {
 
                 {move || {
                     match referrer_analytics.get() {
-                        None => view! { <p>"Loading referrer analytics..."</p> }.into_any(),
+                        None => view! {
+                            <p>"Loading referrer analytics..."</p>
+                        }.into_any(),
 
                         Some(Ok(items)) => view! {
                             <ul>
