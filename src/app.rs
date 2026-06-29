@@ -20,7 +20,7 @@ pub fn App() -> impl IntoView {
         <Title text="Pablo Mendoza Portfolio"/>
         <Meta charset="utf-8"/>
         <Meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <Stylesheet id="leptos" href="/pkg/leptos-portfolio.css"/>
+        <Stylesheet id="leptos" href="/pkg/leptos-portfolio-v2.css"/>
         
         <Router>
 
@@ -46,7 +46,7 @@ pub fn shell(options: LeptosOptions) -> impl IntoView {
                 <AutoReload options=options.clone() />
                 <HydrationScripts options/>
                 <MetaTags/>
-                <Stylesheet id="leptos" href="/pkg/leptos-portfolio.css"/>
+                <Stylesheet id="leptos" href="/pkg/leptos-portfolio-v2.css"/>
             </head>
             <body>
                 <App/>
